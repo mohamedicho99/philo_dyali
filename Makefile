@@ -1,5 +1,5 @@
 NAME = philo
-CFLAGS = -pthread -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pthread
 SRCS = main.c\
 	   parsing/parsing.c\
 	   parsing/clean_data.c\
