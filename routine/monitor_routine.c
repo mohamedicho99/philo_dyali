@@ -2,16 +2,14 @@
 
 void	reset_ate_bool(t_data *data)
 {
-	t_philo	*philos;
 	int		i;
 
-	philos = data->philos;
 	i = 0;
 	while (i < data->philos_count)
 	{
-		pthread_mutex_lock(&philos[i].mutex_ate);
-		philos[i].ate = false;
-		pthread_mutex_unlock(&philos[i].mutex_ate);
+		pthread_mutex_lock(&data->philos[i].mutex_ate);
+		data->philos[i].ate = false;
+		pthread_mutex_unlock(&data->philos[i].mutex_ate);
 		i++;
 	}
 }
@@ -95,7 +93,7 @@ void *monitor_routine(void *arg)
 
 	data = (t_data *)arg;
 
-	init_odds_turn(data);
+	init_evens_turn(data);
 	declare_creation(data);
 
 

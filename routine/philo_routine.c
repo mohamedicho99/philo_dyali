@@ -42,10 +42,10 @@ bool	check_turn(t_philo *philo)
 	while (!check_death(philo->data))
 	{
 		if (philo->id % 2 == philo_turn(philo->data) && !ate_once(philo))
-			return (true);
+			break;
 		usleep(100);
 	}
-	return (false);
+	return (true);
 }
 
 void	*philo_routine(void *arg)
@@ -64,7 +64,6 @@ void	*philo_routine(void *arg)
 			return (NULL);
 		if (philo->cycles != -1)
 			philo->cycles--;
-		printf("ok\n");
 	}
 
 	pthread_mutex_lock(&philo->data->mutex_full);

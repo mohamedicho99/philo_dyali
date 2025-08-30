@@ -13,10 +13,10 @@ void	ft_printf(char *s, long philo_id, t_data *data)
 	pthread_mutex_unlock(&data->mutex_print);
 }
 
-void init_odds_turn(t_data *data)
+void init_evens_turn(t_data *data)
 {
 	pthread_mutex_lock(&data->mutex_turn);
-	data->turn = ODD;
+	data->turn = EVEN;
 	pthread_mutex_unlock(&data->mutex_turn);
 }
 

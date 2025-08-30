@@ -52,15 +52,12 @@ typedef struct s_data
 	long	time_to_die;
 	long	time_to_eat;
 	long	time_to_sleep;
-	// must eat count
 	long	cycle_count;;
-
 	t_fork	*forks;
 	t_philo	*philos;
 	pthread_t monitor;
 	t_type		turn;
 	bool		death;
-
 	bool	monitor_ready;	
 	t_mutex	mutex_monitor_ready;	
 	t_mutex	mutex_death;	
@@ -82,7 +79,7 @@ void	*ft_calloc(int size);
 void	clean_data(t_data *data);
 bool	start_dinner(t_data *data);;
 void	*monitor_routine(void *arg);
-void	init_odds_turn(t_data *data);
+void	init_evens_turn(t_data *data);
 void	declare_creation(t_data *data);
 long	get_time_ms(void);
 void	switch_turn(t_data *data);

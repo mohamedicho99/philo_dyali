@@ -2,7 +2,7 @@
 
 bool	eat(t_philo *philo)
 {
-	if (!check_death(philo->data))
+	if (check_death(philo->data))
 		return (false);
 	pthread_mutex_lock(&philo->mutex_last_meal);
 	philo->last_meal_time = get_current_time(philo->data);
@@ -32,7 +32,7 @@ bool	think(t_philo *philo)
 
 bool	start_cycle(t_philo *philo)
 {
-	if (!take_forks(philo) || !eat(philo) || _sleep(philo) || !think(philo))
+	if (!take_forks(philo) || !eat(philo) || !_sleep(philo) || !think(philo))
 		return (false);
 	return (true);
 }
