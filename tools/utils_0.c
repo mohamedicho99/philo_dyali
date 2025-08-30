@@ -1,15 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_0.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohel-mo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/30 21:21:38 by mohel-mo          #+#    #+#             */
+/*   Updated: 2025/08/30 21:21:39 by mohel-mo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philo.h"
 
 long	get_timestamp(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
+
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
 void	ft_usleep(long ms)
 {
-	long start;
+	long	start;
 
 	start = get_time_ms();
 	while (get_time_ms() - start < ms)
@@ -22,7 +35,7 @@ void	ft_bzero(void *s, size_t len)
 	size_t			i;
 
 	i = 0;
-	ptr = (unsigned char*)s;
+	ptr = (unsigned char *)s;
 	while (i < len)
 	{
 		ptr[i] = '\0';

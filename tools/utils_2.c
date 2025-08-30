@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohel-mo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/30 21:22:28 by mohel-mo          #+#    #+#             */
+/*   Updated: 2025/08/30 21:22:33 by mohel-mo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philo.h"
 
 void	ft_printf(char *s, long philo_id, t_data *data)
@@ -13,7 +25,7 @@ void	ft_printf(char *s, long philo_id, t_data *data)
 	pthread_mutex_unlock(&data->mutex_print);
 }
 
-void init_evens_turn(t_data *data)
+void	init_evens_turn(t_data *data)
 {
 	pthread_mutex_lock(&data->mutex_turn);
 	data->turn = EVEN;

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_extra_data.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohel-mo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/30 21:18:40 by mohel-mo          #+#    #+#             */
+/*   Updated: 2025/08/30 21:18:41 by mohel-mo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philo.h"
 #include <stdlib.h>
 
-t_fork *init_forks_data(t_data *data)
+t_fork	*init_forks_data(t_data *data)
 {
 	int		i;
-	t_fork *forks;
+	t_fork	*forks;
 
 	forks = ft_calloc(sizeof(t_fork) * data->philos_count);
 	if (!forks)
@@ -21,9 +33,9 @@ t_fork *init_forks_data(t_data *data)
 
 t_philo	*init_philos_data(t_data *data)
 {
-	t_philo		*philos;
-	int			i;
-	int			count;
+	t_philo	*philos;
+	int		i;
+	int		count;
 
 	count = data->philos_count;
 	philos = ft_calloc(sizeof(t_philo) * count);
@@ -33,11 +45,11 @@ t_philo	*init_philos_data(t_data *data)
 	while (i < count)
 	{
 		philos[i].data = data;
-		philos[i].id = i + 1;;
- 		philos[i].right_fork = &data->forks[(i + 1) % count];
+		philos[i].id = i + 1;
+		philos[i].right_fork = &data->forks[(i + 1) % count];
 		if (count > 1)
 			philos[i].left_fork = &data->forks[i];
-		philos[i].cycles = data->cycle_count;;
+		philos[i].cycles = data->cycle_count;
 		pthread_mutex_init(&philos[i].mutex_last_meal, NULL);
 		pthread_mutex_init(&philos[i].mutex_ate, NULL);
 		pthread_mutex_init(&philos[i].mutex_full, NULL);
@@ -46,26 +58,18 @@ t_philo	*init_philos_data(t_data *data)
 	return (philos);
 }
 
-// change return value 
-int init_extra_data(t_data *data)
+int	init_extra_data(t_data *data)
 {
-	// forks 
 	data->forks = init_forks_data(data);
 	if (!data->forks)
 		return (EXIT_FAILURE);
-	
-	// philos
 	data->philos = init_philos_data(data);
 	if (!data->philos)
 		return (EXIT_FAILURE);
-
-	// init mutexes
-	pthread_mutex_init(&data->mutex_monitor_ready, NULL);	
+	pthread_mutex_init(&data->mutex_monitor_ready, NULL);
 	pthread_mutex_init(&data->mutex_death, NULL);
 	pthread_mutex_init(&data->mutex_eaters, NULL);
 	pthread_mutex_init(&data->mutex_turn, NULL);
 	pthread_mutex_init(&data->mutex_print, NULL);
-
 	return (EXIT_SUCCESS);
 }
-
