@@ -9,8 +9,10 @@ long	get_timestamp(void)
 
 void	ft_usleep(long ms)
 {
-	long start = get_timestamp();
-	while (get_timestamp() - start < ms)
+	long start;
+
+	start = get_time_ms();
+	while (get_time_ms() - start < ms)
 		usleep(100);
 }
 

@@ -20,9 +20,7 @@ typedef pthread_mutex_t t_mutex;
 typedef enum s_type
 {
 	EVEN,
-	ODD,
-	FORK,
-	PHILO
+	ODD
 }	t_type;
 
 typedef struct s_philo
@@ -35,6 +33,9 @@ typedef struct s_philo
 	t_mutex			mutex_full;
 	t_mutex			mutex_ate;
 	t_mutex			mutex_last_meal;
+	long			last_meal_time;
+	bool			full;
+	bool			ate;
 	long			cycles;
 } t_philo;
 
@@ -58,6 +59,7 @@ typedef struct s_data
 	t_philo	*philos;
 	pthread_t monitor;
 	t_type		turn;
+	bool		death;
 
 	bool	monitor_ready;	
 	t_mutex	mutex_monitor_ready;	
@@ -65,7 +67,9 @@ typedef struct s_data
 	t_mutex	mutex_eaters;	
 	t_mutex	mutex_turn;	
 	t_mutex	mutex_print;	
+	t_mutex	mutex_full;	
 	long start_time;
+	long	eaters;
 } t_data;
 
 void	init_data(t_data data);
@@ -78,9 +82,15 @@ void	*ft_calloc(int size);
 void	clean_data(t_data *data);
 bool	start_dinner(t_data *data);;
 void	*monitor_routine(void *arg);
-void	init_evens_turn(t_data *data);
+void	init_odds_turn(t_data *data);
 void	declare_creation(t_data *data);
 long	get_time_ms(void);
 void	switch_turn(t_data *data);
+long	get_current_time(t_data *data);
+bool	start_cycle(t_philo *philo);
+bool	check_death(t_data *data);
+bool	take_forks(t_philo *philo);
+void	ft_printf(char *s, long philo_id, t_data *data);
+void	release_forks(t_philo *philo);
 
 #endif

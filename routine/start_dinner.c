@@ -40,8 +40,6 @@ bool	join_threads(t_data *data)
 
 bool start_dinner(t_data *data)
 {
-	printf("data from start dinner: %p\n", &data);
-
 	if (!create_threads(data))
 		return (false);
 	if (!join_threads(data))

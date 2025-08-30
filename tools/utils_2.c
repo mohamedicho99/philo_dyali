@@ -1,9 +1,22 @@
 #include "../philo.h"
 
-void init_evens_turn(t_data *data)
+void	ft_printf(char *s, long philo_id, t_data *data)
+{
+	bool	death;
+
+	pthread_mutex_lock(&data->mutex_death);
+	death = data->death;
+	pthread_mutex_unlock(&data->mutex_death);
+	pthread_mutex_lock(&data->mutex_print);
+	if (!death)
+		printf(s, get_current_time(data), philo_id);
+	pthread_mutex_unlock(&data->mutex_print);
+}
+
+void init_odds_turn(t_data *data)
 {
 	pthread_mutex_lock(&data->mutex_turn);
-	data->turn = EVEN;
+	data->turn = ODD;
 	pthread_mutex_unlock(&data->mutex_turn);
 }
 

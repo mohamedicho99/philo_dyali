@@ -1,5 +1,5 @@
 NAME = philo
-CFLAGS = -g3 -Wall -Wextra -Werror -pthread
+CFLAGS = -pthread #-Wall -Wextra -Werror 
 SRCS = main.c\
 	   parsing/parsing.c\
 	   parsing/clean_data.c\
@@ -8,7 +8,9 @@ SRCS = main.c\
 	   tools/utils_1.c\
 	   tools/utils_2.c\
 	   routine/philo_routine.c\
+	   routine/control_forks.c\
 	   routine/monitor_routine.c\
+	   routine/start_cycle.c\
 	   routine/start_dinner.c
 OBJS = $(SRCS:.c=.o)
 all: $(NAME)

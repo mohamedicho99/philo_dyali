@@ -19,7 +19,7 @@ t_fork *init_forks_data(t_data *data)
 	return (forks);
 }
 
-t_philo *init_philos_data(t_data *data)
+t_philo	*init_philos_data(t_data *data)
 {
 	t_philo		*philos;
 	int			i;
