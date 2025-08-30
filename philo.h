@@ -1,0 +1,86 @@
+#ifndef PHILO_H
+#define PHILO_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <sys/time.h>
+
+void parsing(void);
+void args_count_error(void);
+void ft_bzero(void *s, size_t len);
+
+typedef struct s_philo t_philo;
+typedef struct s_data t_data;
+typedef struct s_fork t_fork;
+typedef pthread_mutex_t t_mutex;
+
+typedef enum s_type
+{
+	EVEN,
+	ODD,
+	FORK,
+	PHILO
+}	t_type;
+
+typedef struct s_philo
+{
+	long			id;
+	pthread_t 		thread_id;
+	t_data			*data;
+	t_fork			*right_fork;
+	t_fork			*left_fork;
+	t_mutex			mutex_full;
+	t_mutex			mutex_ate;
+	t_mutex			mutex_last_meal;
+	long			cycles;
+} t_philo;
+
+typedef struct s_fork
+{
+	int				id;
+	t_mutex			mutex;
+	bool			taken;
+} t_fork;
+
+typedef struct s_data
+{
+	int		philos_count;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_to_sleep;
+	// must eat count
+	long	cycle_count;;
+
+	t_fork	*forks;
+	t_philo	*philos;
+	pthread_t monitor;
+	t_type		turn;
+
+	bool	monitor_ready;	
+	t_mutex	mutex_monitor_ready;	
+	t_mutex	mutex_death;	
+	t_mutex	mutex_eaters;	
+	t_mutex	mutex_turn;	
+	t_mutex	mutex_print;	
+	long start_time;
+} t_data;
+
+void	init_data(t_data data);
+int		parse_args(int argc, char **argv, t_data *data);
+long	get_timestamp(void);
+void	ft_usleep(long ms);
+void	*philo_routine(void *arg);
+int 	init_extra_data(t_data *data);
+void	*ft_calloc(int size);
+void	clean_data(t_data *data);
+bool	start_dinner(t_data *data);;
+void	*monitor_routine(void *arg);
+void	init_evens_turn(t_data *data);
+void	declare_creation(t_data *data);
+long	get_time_ms(void);
+void	switch_turn(t_data *data);
+
+#endif

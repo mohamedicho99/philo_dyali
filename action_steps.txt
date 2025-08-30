@@ -1,0 +1,27 @@
+
+
+init extra data
+	// almost done
+start dinner 
+	(once the thread is created the philo will start his routine)
+	// create threads
+		-> philos and monitors 
+	// join threads
+		-> philos and monitors 
+	(join helps telling the process for the threads to kinda finish doing their job)
+
+start building philo routine
+	from there you'll get to:
+		check turn 
+		start cycle
+	
+start with:
+	check starvation
+		the monitor needs to call this one and it does every time
+			(anwser this: how often does it call it?)
+	check fullness
+
+-> what happens when start cycle return NULL? 
+	does the pthread create fail?
+	how does the program terminate itself from this point!
+	no flow chart needed her! be concise
