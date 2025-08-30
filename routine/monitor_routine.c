@@ -63,7 +63,6 @@ bool	check_starvation(t_philo *philo)
 	long	time_to_die;
 	long	last_meal;
 	bool	full;
-
 	pthread_mutex_lock(&philo->mutex_full);
 	full = philo->full;
 	pthread_mutex_unlock(&philo->mutex_full);
@@ -82,8 +81,9 @@ bool	check_starvation(t_philo *philo)
 		pthread_mutex_lock(&philo->data->mutex_print);
 		printf("%ld %ld died\n", get_current_time(philo->data), philo->id);
 		pthread_mutex_unlock(&philo->data->mutex_print);
+		return (true);
 	}
-	return (true);
+	return (false);
 }
 
 void *monitor_routine(void *arg)
@@ -101,10 +101,14 @@ void *monitor_routine(void *arg)
 	while (true)
 	{
 		check_fork_release(data);
+		
 		i = 0;
 		while (i < data->philos_count)
 		{
-			if (check_fullness(data) || check_starvation(&data->philos[i]))
+			if (check_fullness(data))
+				return NULL;
+			
+			if (check_starvation(&data->philos[i]))
 				return (NULL);
 			i++;
 		}
